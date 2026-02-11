@@ -30,3 +30,6 @@ Thumbs.db
 *.un~
 *.pyc
 *.swp
+build/
+*.egg-info/
+__pycache__/
