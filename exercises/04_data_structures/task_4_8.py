@@ -26,3 +26,13 @@ this stage it is difficult otherwise test the result.
 """
 
 ip = "192.168.3.1"
+first_row = ip.split('.')
+second_row = []
+for part in first_row:
+  second_row.append(f"{int(part):08b}")
+
+result = (
+  f'{first_row[0]:<10}{first_row[1]:<10}{first_row[2]:<10}{first_row[3]:<10}\n'
+  f'{second_row[0]:<10}{second_row[1]:<10}{second_row[2]:<10}{second_row[3]:<10}'
+)
+print(result)

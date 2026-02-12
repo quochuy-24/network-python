@@ -16,3 +16,10 @@ this stage it is difficult otherwise test the result.
 """
 
 mac = "AAAA:BBBB:CCCC"
+mac_clean = mac.replace(":","")
+result = ""
+
+for char in mac_clean:
+  result += f"{int(char,16):04b}"
+
+print(result)
