@@ -12,3 +12,15 @@ Depending on the type of address (described below), print to the stdout:
 
 Restriction: All tasks must be done using the topics covered in this and previous chapters.
 """
+ip_add = input()
+first_byte = ip_add.split('.')[0]
+if int(first_byte) >= 1 and int(first_byte) <= 223:
+  print('unicast')
+elif int(first_byte) >= 224 and int(first_byte) <= 239:
+  print('multicast')
+elif ip_add == '0.0.0.0':
+  print('unassigned')
+elif ip_add == '255.255.255.255':
+  print('local broadcast')
+else:
+  print('unused')
