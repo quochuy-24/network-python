@@ -43,3 +43,13 @@ london_co = {
         "routing": True,
     },
 }
+
+device_name = input("Enter device name: ")
+parameters = [key for key in london_co[device_name]]
+options = ', '.join(parameters)
+parameter_request = input(f"Enter parameter name ({options}): ")
+parameter_request = parameter_request.lower()
+if parameter_request not in parameters:
+    print("There is no such parameter")
+else:
+    print(london_co[device_name][parameter_request])

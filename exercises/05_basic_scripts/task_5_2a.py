@@ -41,3 +41,35 @@ Then the network address will be the first 28 characters from bin_ip + 0000
 Restriction: All tasks must be done using the topics covered in this and previous chapters.
 
 """
+def and_bitwise(string1, string2):
+    result = ""
+
+    num1 = int(string1, 2)
+    num2 = int(string2, 2)
+    result = f"{num1&num2:08b}"
+    return result
+
+ip_input = input("Ask the user to enter the IP network in the format: ")
+network, netmask = ip_input.split('/') # 192.168.1.1/24 => ['192.168.1.1.','24]
+network_part = network.split('.') # 192.168.1.1 => ['192','168','1','1']
+
+network_bin = [] 
+for part in network_part:
+  network_bin.append(f'{int(part):08b}') 
+#['192','168','1','1'] -> ['11000000', '10101000', '00000001', '00000001']
+
+num = int(netmask)
+netmask_binary = num * '1' + (32-num) * '0' # 24 -> '11111111111111111111111100000000'
+list_netmask_bin = [netmask_binary[i:i+8] for i in range(0,32,8)] #'11111111111111111111111100000000' -> ['11111111', '11111111', '11111111', '00000000']
+
+network_bin = [and_bitwise(network_bin[i],list_netmask_bin[i]) for i in range(4)]
+network = [int(network_bin[i],2) for i in range(4)]
+
+template = "{:<10}{:<10}{:<10}{:<10}"
+print("Network:")
+print(template.format(network[0],network[1],network[2],network[3]))
+print(template.format(network_bin[0],network_bin[1],network_bin[2],network_bin[3]))
+print('\nMask:')
+print(f'/{num}')
+print(template.format(int(list_netmask_bin[0],2),int(list_netmask_bin[1],2),int(list_netmask_bin[2],2),int(list_netmask_bin[3],2)))
+print(template.format(list_netmask_bin[0],list_netmask_bin[1],list_netmask_bin[2],list_netmask_bin[3]))
