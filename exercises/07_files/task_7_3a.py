@@ -40,3 +40,24 @@ if you sort list of lists above.
 Restriction: All tasks must be done using the topics covered in this and previous chapters.
 
 """
+f = open('CAM_table.txt','r')
+
+while True:
+  line = f.readline()
+  if line.startswith('Vlan'):
+    line = f.readline()
+    break
+template = ('{:<9}{:<22}{}')
+mac_table = []
+for line in f:
+  mac_line = []
+  vlan, mac, _, interface = line.split()
+  mac_line.append(int(vlan))
+  mac_line.append(mac)
+  mac_line.append(interface)
+  mac_table.append(mac_line)
+f.close()
+mac_table.sort()
+for l in mac_table:
+  print(template.format(*l))
+

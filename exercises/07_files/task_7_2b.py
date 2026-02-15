@@ -16,5 +16,22 @@ that start with ! must be filtered.
 Restriction: All tasks must be done using the topics covered in this and previous chapters.
 
 """
-
+import sys
 ignore = ["duplex", "alias", "configuration"]
+
+file_name = sys.argv[1]
+result_file = sys.argv[2]
+
+with open(file_name, 'r') as f, open(result_file,'w') as dest:
+  for line in f:
+    flag = True
+    if line.startswith('!'):
+      flag=False
+    for word in ignore:
+      if word in line:
+        flag = False
+
+    if not flag:
+      continue
+    dest.write(line)
+    

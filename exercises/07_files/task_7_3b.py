@@ -17,3 +17,17 @@ Enter VLAN number: 10
 Restriction: All tasks must be done using the topics covered in this and previous chapters.
 
 """
+vlan_input = input("Enter VLAN number: ")
+f = open('CAM_table.txt','r')
+while True:
+  line = f.readline()
+  if line.startswith('Vlan'):
+    line = f.readline()
+    break
+template = ('{:<9}{:<22}{}')
+mac_table = []
+for line in f:
+  vlan, mac,_, interface = line.split()
+  if vlan == vlan_input:
+    print(template.format(vlan, mac, interface))
+f.close()

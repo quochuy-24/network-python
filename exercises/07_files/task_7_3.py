@@ -20,3 +20,34 @@ the following table was printed on the stdout:
 Restriction: All tasks must be done using the topics covered in this and previous chapters.
 
 """
+'''
+sw1#sh mac address-table 
+          Mac Address Table
+-------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+ 100    01bb.c580.7000    DYNAMIC     Gi0/1
+ 200    0a4b.c380.7c00    DYNAMIC     Gi0/2
+ 300    a2ab.c5a0.700e    DYNAMIC     Gi0/3
+ 10     0a1b.1c80.7000    DYNAMIC     Gi0/4
+ 500    02b1.3c80.7b00    DYNAMIC     Gi0/5
+ 200    1a4b.c580.7000    DYNAMIC     Gi0/6
+ 300    0a1b.5c80.70f0    DYNAMIC     Gi0/7
+ 10     01ab.c5d0.70d0    DYNAMIC     Gi0/8
+ 1000   0a4b.c380.7d00    DYNAMIC     Gi0/9
+
+'''
+f = open('CAM_table.txt','r')
+
+while True:
+  line = f.readline()
+  if line.startswith('Vlan'):
+    line = f.readline()
+    break
+template = ('{:<9}{:<22}{}')
+for line in f:
+  vlan, mac, _, interface = line.split()
+  print(template.format(vlan,mac,interface))
+
+f.close() 

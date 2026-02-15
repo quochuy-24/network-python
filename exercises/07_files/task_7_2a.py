@@ -15,5 +15,20 @@ The filename is passed as an argument to the script.
 Restriction: All tasks must be done using the topics covered in this and previous chapters.
 
 """
-
+import sys
 ignore = ["duplex", "alias", "configuration"]
+
+
+file_name = sys.argv[1]
+with open(file_name, 'r') as f:
+  for line in f:
+    flag = True
+    if line.startswith('!'):
+      flag=False
+    for word in ignore:
+      if word in line:
+        flag = False
+
+    if not flag:
+      continue
+    print(line.rstrip())
