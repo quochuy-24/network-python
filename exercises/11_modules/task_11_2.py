@@ -27,9 +27,28 @@ command output files, you need to correct the function code in task 11.1.
 Restriction: All tasks must be done using the topics covered in this and previous chapters.
 
 """
+import task_11_1
+import graphviz
 infiles = [
     "sh_cdp_n_sw1.txt",
     "sh_cdp_n_r1.txt",
     "sh_cdp_n_r2.txt",
     "sh_cdp_n_r3.txt",
 ]
+
+def create_network_map(filenames):
+    topology = {}
+    for filename in filenames:
+        with open(filename,'r') as f:
+            topology.update(task_11_1.parse_cdp_neighbors(f.read()))
+    return topology
+
+
+        
+
+if __name__ =="__main__":
+    result = create_network_map(infiles)
+    print(result)
+        
+
+    #print(result)

@@ -74,10 +74,36 @@ Do not copy the code of the create_network_map and draw_topology functions.
 Restriction: All tasks must be done using the topics covered in this and previous chapters.
 
 """
-
+from task_11_2 import create_network_map
+from draw_network_graph import draw_topology
 infiles = [
     "sh_cdp_n_sw1.txt",
     "sh_cdp_n_r1.txt",
     "sh_cdp_n_r2.txt",
     "sh_cdp_n_r3.txt",
 ]
+
+# def unique_network_map(topology_dict):
+#     unique_topology_dict = {}
+#     for key, value in topology_dict.items():
+#         if key not in topology_dict.values():
+#             unique_topology_dict[key] = value
+#         elif topology_dict[value] == key:
+#             continue
+#     print(unique_topology_dict)
+def unique_network_map(topology_dict):
+    unique_topology = {}
+
+    for l_device, r_device in topology_dict.items():
+        # Kiểm tra xem cặp ngược lại (r_device: l_device) đã có trong kết quả chưa
+        # Nếu chưa có thì mới thêm cặp hiện tại (l_device: r_device) vào
+        if r_device not in unique_topology:
+            unique_topology[l_device] = r_device
+            
+    return unique_topology # Bắt buộc phải return
+
+if __name__ == "__main__":
+    topology_dict = create_network_map(infiles)
+    unique = unique_network_map(topology_dict)
+    draw_topology(unique)
+
